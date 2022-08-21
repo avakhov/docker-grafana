@@ -1,0 +1,20 @@
+#!/bin/bash
+set -e
+
+if [ "$1" == "" ]; then
+  echo "ERROR: missed tag arg"
+  exit -1
+fi
+
+if [ -n "$(git status --porcelain)" ]; then
+  echo "ERROR: there are changes"
+  exit -1
+fi
+
+set -x
+git tag $1
+git push
+git push --tags
+docker build -t avakhov/grafana:$1 .
+docker push avakhov/grafana:$1
+echo done.
