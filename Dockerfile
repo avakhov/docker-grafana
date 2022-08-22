@@ -6,3 +6,4 @@ RUN wget https://dl.grafana.com/oss/release/grafana-${GRAFANA_VERSION}.linux-amd
   tar xzvf grafana.tar.gz && \
   mv grafana-${GRAFANA_VERSION} /grafana
 WORKDIR /grafana
+COPY home.json ./public/dashboards/

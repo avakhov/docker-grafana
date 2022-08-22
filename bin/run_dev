@@ -1,0 +1,9 @@
+#!/bin/bash
+set -ex
+
+docker build -t gr .
+docker run -it --rm \
+  -p 3000:3000 \
+  -e GF_AUTH_ANONYMOUS_ENABLED=true \
+  --name gr \
+  gr bin/grafana-server
